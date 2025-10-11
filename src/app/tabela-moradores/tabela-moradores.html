@@ -1,0 +1,22 @@
+<h2>Tabela de Moradores</h2>
+@if(listaMoradores.length > 0) {
+  <table>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Pontuação</th>
+      </tr>
+      @for (morador of listaMoradores; track morador.id) {
+        <tr>
+          <td>{{morador.id}}</td>
+          <td>{{morador.nome}}</td>
+          <td>{{morador.email}}</td>
+          <td>{{morador.pontuacao}}</td>
+        </tr>
+      }
+  </table>
+}
+@else {
+  <p>Nenhum morador cadastrado.</p>
+}

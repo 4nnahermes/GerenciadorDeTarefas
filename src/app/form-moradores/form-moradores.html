@@ -1,0 +1,29 @@
+<h3>Formulário de Moradores</h3>
+<div>
+    <label for="id">ID:</label>
+    <input type="number" id="id" [(ngModel)]="morador.id">
+    <br />
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" [(ngModel)]="morador.nome">
+    <br />
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="morador.email">
+    <br />
+    <label for="pontuacao">Pontuação:</label>
+    <input type="number" id="pontuacao" [(ngModel)]="morador.pontuacao">
+    <br />
+
+    <button (click)="cadastrarMorador()">Cadastrar Morador</button>
+</div>
+
+{{ morador | json }}
+<ul>
+    @for(morador of listaMoradores; track morador.id) {
+        <li>
+            {{ morador | json }}
+        </li>
+        }
+        @empty {
+            <h4>Nenhum morador cadastrado.</h4>
+        }
+</ul>

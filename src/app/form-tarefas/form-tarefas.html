@@ -1,0 +1,34 @@
+<h3>Formulário de Tarefas</h3>
+
+<div>
+    <label for="id">ID:</label>
+    <input type="number" id="id" [(ngModel)]="tarefa.id">
+    <br />
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" [(ngModel)]="tarefa.titulo">
+    <br />
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" [(ngModel)]="tarefa.descricao">
+    <br />
+    <label for="concluida">Concluída:</label>
+    <input type="checkbox" id="concluida" [(ngModel)]="tarefa.concluida">
+    <br />
+    <label for="usuario">Usuário:</label>
+    <input type="text" id="usuario" [(ngModel)]="tarefa.usuario">
+    <br />
+
+    <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+</div>
+
+{{ tarefa | json }}
+<ul>
+    @for(tarefa of listaTarefas; track tarefa.id) {
+        <li>
+            {{ tarefa | json }}
+        </li>
+        }
+        @empty {
+            <h4>Nenhuma tarefa cadastrada.</h4>
+        }
+</ul>
+

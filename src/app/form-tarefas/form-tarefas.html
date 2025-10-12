@@ -1,34 +1,47 @@
-<h3>Formulário de Tarefas</h3>
+<div class="container">
+    <h2>Formulário de Tarefas</h2>
 
-<div>
-    <label for="id">ID:</label>
-    <input type="number" id="id" [(ngModel)]="tarefa.id">
-    <br />
-    <label for="titulo">Título:</label>
-    <input type="text" id="titulo" [(ngModel)]="tarefa.titulo">
-    <br />
-    <label for="descricao">Descrição:</label>
-    <input type="text" id="descricao" [(ngModel)]="tarefa.descricao">
-    <br />
-    <label for="concluida">Concluída:</label>
-    <input type="checkbox" id="concluida" [(ngModel)]="tarefa.concluida">
-    <br />
-    <label for="usuario">Usuário:</label>
-    <input type="text" id="usuario" [(ngModel)]="tarefa.usuario">
-    <br />
+    <div>
+        <div class="mb-3">
+            <label for="id" class="form-label">ID:</label>
+            <input type="number" id="id" [(ngModel)]="tarefa.id" class="form-control" placeholder="ID da tarefa">
+        </div>
 
-    <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
-</div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título:</label>
+            <input type="text" id="titulo" [(ngModel)]="tarefa.titulo" class="form-control"
+                placeholder="Título da tarefa">
+        </div>
 
-{{ tarefa | json }}
-<ul>
-    @for(tarefa of listaTarefas; track tarefa.id) {
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição:</label>
+            <input type="text" id="descricao" [(ngModel)]="tarefa.descricao" class="form-control"
+                placeholder="Descrição da tarefa">
+        </div>
+
+        <div class="mb-3">
+            <label for="concluida" class="form-label">Concluída:</label>
+            <input type="checkbox" id="concluida" [(ngModel)]="tarefa.concluida" class="form-check-input">
+        </div>
+
+        <div class="mb-3">
+            <label for="usuario" class="form-label">Usuário:</label>
+            <input type="text" id="usuario" [(ngModel)]="tarefa.usuario" class="form-control"
+                placeholder="Usuário responsável pela tarefa">
+        </div>
+
+        <button (click)="cadastrarTarefa()" class="btn btn-primary">CADASTRAR</button>
+    </div>
+
+    {{ tarefa | json }}
+    <ul>
+        @for(tarefa of listaTarefas; track tarefa.id) {
         <li>
             {{ tarefa | json }}
         </li>
         }
         @empty {
-            <h4>Nenhuma tarefa cadastrada.</h4>
+        <h4>Nenhuma tarefa cadastrada.</h4>
         }
-</ul>
-
+    </ul>
+</div>

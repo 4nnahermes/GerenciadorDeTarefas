@@ -9,12 +9,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form-tarefas.css'
 })
 export class FormTarefas {
-  tarefa: any = {id: 0, titulo: '', descricao: '', concluida: false, usuario: ''};
+  tarefa: any = {id: 0, titulo: '', descricao: '', pontos: 0, concluida: false, usuario: ''};
   listaTarefas: any[] = [];
 
   cadastrarTarefa() {
     this.listaTarefas.push(this.tarefa);
     alert('Tarefa cadastrada com sucesso!');
-    this.tarefa = {id: 0, titulo: '', descricao: '', concluida: false, usuario: ''};
+    this.tarefa = {id: 0, titulo: '', descricao: '', pontos: 0, concluida: false, usuario: ''};
   }
 }

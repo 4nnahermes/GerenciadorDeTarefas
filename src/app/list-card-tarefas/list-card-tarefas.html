@@ -1,0 +1,9 @@
+<h2>ListCard de Tarefas</h2>
+
+<div class="row">
+    @for(tar of listaTarefas; track tar.id) {
+    <div class="column">
+        <app-card-tarefa [tarefa]="tar"></app-card-tarefa>
+    </div>
+    }
+</div>

@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CardTarefa } from '../card-tarefa/card-tarefa';
 
 @Component({
-  selector: 'app-tabela-tarefas',
-  imports: [CommonModule],
-  templateUrl: './tabela-tarefas.html',
-  styleUrl: './tabela-tarefas.css'
+  selector: 'app-list-card-tarefas',
+  imports: [CardTarefa],
+  templateUrl: './list-card-tarefas.html',
+  styleUrl: './list-card-tarefas.css'
 })
-export class TabelaTarefas {
+export class ListCardTarefas {
   listaTarefas: any[] = [
     {id: 1, titulo: 'Varrer a casa', descricao: 'Varrer a casa toda', pontos: 5, concluida: false, usuario: 'João'},
     {id: 2, titulo: 'Lavar a louça', descricao: 'Lavar a louça do almoço', pontos: 3, concluida: true, usuario: 'Maria'},

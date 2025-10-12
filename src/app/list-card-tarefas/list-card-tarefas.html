@@ -1,9 +1,18 @@
-<h2>ListCard de Tarefas</h2>
+<div class="container">
+    <h2>ListCard de Tarefas</h2>
 
-<div class="row">
-    @for(tar of listaTarefas; track tar.id) {
-    <div class="column">
-        <app-card-tarefa [tarefa]="tar"></app-card-tarefa>
+    <div class="row">
+        @for(tar of listaTarefas; track tar.id) {
+        <div class="col col-xl-3 col-lg-4 col-sm-6 col-12">
+            <app-card-tarefa class="p-3">
+                <img titulo [src]="tar.imagem ? tar.imagem : '/imagem.png'" alt="Imagem de Tarefa" class="card-img-top">
+                <div conteudo>
+                    <h5 class="card-title">{{ tar.titulo }}</h5>
+                    <p class="card-text">Pontos: {{ tar.pontos }}</p>
+                    <p class="card-text">Usuário: {{ tar.usuario }}</p>
+                </div>
+            </app-card-tarefa>
+        </div>
+        }
     </div>
-    }
 </div>

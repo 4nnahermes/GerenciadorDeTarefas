@@ -14,26 +14,18 @@
 
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" [(ngModel)]="morador.email" class="form-control" placeholder="Email do morador">
+            <input type="email" id="email" [(ngModel)]="morador.email" class="form-control"
+                placeholder="Email do morador">
         </div>
 
         <div class="mb-3">
             <label for="pontuacao" class="form-label">Pontuação:</label>
-            <input type="number" id="pontuacao" [(ngModel)]="morador.pontuacao" class="form-control" placeholder="Pontuação do morador">
+            <input type="number" id="pontuacao" [(ngModel)]="morador.pontuacao" class="form-control"
+                placeholder="Pontuação do morador">
         </div>
 
         <button (click)="cadastrarMorador()" class="btn btn-primary">CADASTRAR</button>
     </div>
 
     {{ morador | json }}
-    <ul>
-        @for(morador of listaMoradores; track morador.id) {
-        <li>
-            {{ morador | json }}
-        </li>
-        }
-        @empty {
-        <h4>Nenhum morador cadastrado.</h4>
-        }
-    </ul>
 </div>

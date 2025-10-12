@@ -34,14 +34,4 @@
     </div>
 
     {{ tarefa | json }}
-    <ul>
-        @for(tarefa of listaTarefas; track tarefa.id) {
-        <li>
-            {{ tarefa | json }}
-        </li>
-        }
-        @empty {
-        <h4>Nenhuma tarefa cadastrada.</h4>
-        }
-    </ul>
 </div>

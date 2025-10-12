@@ -1,8 +1,8 @@
-<div class="card">
-    <img src="/imagem.png" alt="Imagem de Tarefa" class="img_card">
-    <div class="container">
-        <h3>{{ tarefa.titulo }}</h3>
-        <p>Pontos: {{ tarefa.pontos }}</p>
-        <p>Usuário: {{ tarefa.usuario }}</p>
+<div class="card shadow">
+    <div class="card-header">
+        <ng-content select="[titulo]"></ng-content>
+    </div>
+    <div class="card-body">
+        <ng-content select="[conteudo]"></ng-content>
     </div>
 </div>

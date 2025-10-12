@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,12 +9,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form-moradores.css'
 })
 export class FormMoradores {
-  morador: any = {id: 0, nome: '', email: '', pontuacao: 0};
-  listaMoradores: any[] = [];
+  morador: any = { id: 0, nome: '', email: '', pontuacao: 0 };
+  @Output() onSalvar = new EventEmitter<any>();
 
   cadastrarMorador() {
-    this.listaMoradores.push(this.morador);
+    this.onSalvar.emit(this.morador);
     alert('Morador cadastrado com sucesso!');
-    this.morador = {id: 0, nome: '', email: '', pontuacao: 0};
+    this.morador = { id: 0, nome: '', email: '', pontuacao: 0 };
   }
 }

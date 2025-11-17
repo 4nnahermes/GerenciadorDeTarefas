@@ -1,10 +1,9 @@
-import { JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-form-moradores',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule],
   templateUrl: './form-moradores.html',
   styleUrl: './form-moradores.css'
 })

@@ -1,10 +1,9 @@
-import { JsonPipe } from '@angular/common';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-form-tarefas',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule],
   templateUrl: './form-tarefas.html',
   styleUrl: './form-tarefas.css'
 })

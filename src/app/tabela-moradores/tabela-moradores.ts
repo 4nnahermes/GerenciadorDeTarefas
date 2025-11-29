@@ -5,7 +5,7 @@ import { Morador } from '../morador';
 import { MoedaPipe } from '../moeda-pipe';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 import { RouterLink } from '@angular/router';
-import { MoradorApiService } from '../morador-api-service';
+import { collection, collectionData, deleteDoc, doc, Firestore, getDocs, orderBy, query, where } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-tabela-moradores',
@@ -16,22 +16,38 @@ import { MoradorApiService } from '../morador-api-service';
 export class TabelaMoradores {
   listaMoradores = signal<Morador[]>([]);
   nomePesquisa: string = '';
-  private moradorApiService = inject(MoradorApiService);
+  private firestore = inject(Firestore);
 
   constructor() {
     this.listar();
   }
 
   listar() {
-    this.moradorApiService.listar().subscribe((moradores) => {
-      this.listaMoradores.set(moradores);
+    const moradoresCollection = collection(this.firestore, 'moradores');
+    const queryMoradores = query(moradoresCollection, orderBy('nome', 'asc'));
+    collectionData<Morador>(queryMoradores, { idField: 'id' }).subscribe(moradores => {
+      if (moradores && (moradores as Morador[]).length > 0) {
+        this.listaMoradores.set(moradores as Morador[]);
+      } else {
+        alert('Nenhum morador disponível para listar.');
+      }
     });
   }
 
-  deletar(id?: number) {
-    this.moradorApiService.deletar(id!).subscribe(morador => {
-      alert(`Morador ${morador.nome?.toUpperCase()} excluído com sucesso!`);
-      this.listar();
-    });
+  async deletar(id?: number) {
+    if (id === undefined || id === null) return;
+
+    const moradoresCollection = collection(this.firestore, 'moradores');
+    const queryMoradores = query(moradoresCollection, where('id', '==', id));
+
+    const docs = await getDocs(queryMoradores as any);
+
+    for (const buscaDocs of docs.docs) {
+      const data = buscaDocs.data() as Morador;
+      await deleteDoc(doc(this.firestore, 'moradores', buscaDocs.id));
+      alert(`Morador ${data?.nome?.toUpperCase()} excluído com sucesso!`);
+    }
+
+    this.listar();
   }
 }

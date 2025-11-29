@@ -5,7 +5,7 @@ import { Tarefa } from '../tarefa';
 import { MoedaPipe } from '../moeda-pipe';
 import { ListCardTarefas } from '../list-card-tarefas/list-card-tarefas';
 import { RouterLink } from "@angular/router";
-import { TarefaApiService } from '../tarefa-api-service';
+import { collection, collectionData, Firestore, orderBy, query, deleteDoc, doc, getDocs, where } from '@angular/fire/firestore';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 
 @Component({
@@ -17,22 +17,38 @@ import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 export class TabelaTarefas {
   listaTarefas = signal<Tarefa[]>([]);
   tituloPesquisa: string = '';
-  private tarefaApiService = inject(TarefaApiService);
+  private firestore = inject(Firestore);
 
   constructor() {
    this.listar();
   }
 
   listar() {
-    this.tarefaApiService.listar().subscribe((tarefas) => {
-      this.listaTarefas.set(tarefas);
+    const tarefasCollection = collection(this.firestore, 'tarefas');
+    const queryTarefas = query(tarefasCollection, orderBy('titulo', 'asc'));
+    collectionData<Tarefa>(queryTarefas, { idField: 'id' }).subscribe(tarefas => {
+      if (tarefas && (tarefas as Tarefa[]).length > 0) {
+        this.listaTarefas.set(tarefas as Tarefa[]);
+      } else {
+        alert('Nenhuma tarefa disponível para listar.');
+      }
     });
   }
 
-  deletar(id?: number) {
-    this.tarefaApiService.deletar(id!).subscribe(tarefa => {
-      alert(`Tarefa ${tarefa.titulo?.toUpperCase()} excluída com sucesso!`);
-      this.listar();
-    });
+  async deletar(id?: number) {
+    if (id === undefined || id === null) return;
+
+    const tarefasCollection = collection(this.firestore, 'tarefas');
+    const queryTarefas = query(tarefasCollection, where('id', '==', id));
+
+    const docs = await getDocs(queryTarefas as any);
+
+    for (const buscaDocs of docs.docs) {
+      const data = buscaDocs.data() as Tarefa;
+      await deleteDoc(doc(this.firestore, 'tarefas', buscaDocs.id));
+      alert(`Tarefa ${data?.titulo?.toUpperCase()} excluída com sucesso!`);
+    }
+
+    this.listar();
   }
 }

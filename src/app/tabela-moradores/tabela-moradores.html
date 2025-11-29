@@ -10,7 +10,6 @@
     <table class="table table-striped table-hover">
       <thead class="bg-primary text-white">
       <tr>
-        <th>ID</th>
         <th>Nome</th>
         <th>Email</th>
         <th>Pontuação</th>
@@ -20,7 +19,6 @@
     <tbody>
       @for (morador of listaMoradores() | filtroPesquisa: nomePesquisa; track morador.id) {
       <tr>
-        <td>{{morador.id}}</td>
         <td>{{morador.nome}}</td>
         <td>{{morador.email}}</td>
         <td>{{morador.pontuacao | moeda }}</td>

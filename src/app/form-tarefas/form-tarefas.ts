@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Tarefa } from '../tarefa';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TarefaApiService } from '../tarefa-api-service';
+import { addDoc, collection, Firestore, doc, docData, updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-form-tarefas',
@@ -11,42 +11,57 @@ import { TarefaApiService } from '../tarefa-api-service';
   styleUrls: ['./form-tarefas.css']
 })
 export class FormTarefas {
-  id?: number;
+  id?: string;
   tarefa = signal<Tarefa>(new Tarefa());
   botaoAcao = 'Cadastrar';
 
-  tarefaApiService = inject(TarefaApiService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  private firestore = inject(Firestore);
 
   constructor() {
     this.id = this.route.snapshot.params['id'];
     if (this.id) {
       this.botaoAcao = 'Editar';
-      this.tarefaApiService.buscarPorId(this.id).subscribe(tarefaEncontrada => {
-        this.tarefa.set(tarefaEncontrada);
-      })
+      const tarefaDocRef = doc(this.firestore, 'tarefas', this.id);
+      docData<Tarefa>(tarefaDocRef, { idField: 'id' }).subscribe(docVal => {
+        if (docVal) this.tarefa.set(docVal as Tarefa);
+      });
     }
   }
 
-  salvar() {
+  async salvar() {
     if (this.id) {
-      this.tarefaApiService.editar(this.id, this.tarefa()).subscribe(tarefaAlterada => {
-        alert(`Tarefa ${tarefaAlterada.titulo?.toUpperCase()} editada com sucesso!`);
-        this.router.navigate(['/tabela-tarefas']);
-      });
-    } else {
-      this.tarefaApiService.inserir(this.tarefa()).subscribe(
-        (tarefa) => {
-          alert(`Tarefa ${tarefa.titulo?.toUpperCase()} cadastrada com sucesso!`);
-          this.tarefa.set(new Tarefa());
-          this.router.navigate(['/tabela-tarefas']);
-        }
-      );
+      const tarefaDocRef = doc(this.firestore, 'tarefas', String(this.id));
+      const tarefaAtualizada = this.getTarefa();
+
+      await updateDoc(tarefaDocRef, tarefaAtualizada);
+      alert(`Tarefa ${tarefaAtualizada.titulo?.toUpperCase()} editada com sucesso!`);
+      this.router.navigate(['/tabela-tarefas']);
+    }
+    else {
+      const tarefaCollection = collection(this.firestore, "tarefas");
+      const novaTarefa = this.getTarefa();
+
+      const docRef = await addDoc(tarefaCollection, novaTarefa);
+      await updateDoc(docRef, { id: docRef.id });
+      alert(`Tarefa ${novaTarefa.titulo?.toUpperCase()} cadastrada com sucesso!`);
+      this.tarefa.set(new Tarefa());
+      this.router.navigate(['/tabela-tarefas']);
     }
   }
 
   voltar() {
     this.router.navigate(['/tabela-tarefas']);
+  }
+
+  private getTarefa(): Partial<Tarefa> {
+    return {
+      titulo: this.tarefa().titulo ?? '',
+      descricao: this.tarefa().descricao ?? '',
+      pontos: this.tarefa().pontos ?? 0,
+      concluida: this.tarefa().concluida ?? false,
+      usuario: this.tarefa().usuario ?? ''
+    };
   }
 }

@@ -1,0 +1,18 @@
+.navbar .navbar-nav {
+	padding-left: 1rem;
+}
+
+.navbar .nav-link,
+.navbar .nav-link:visited {
+	color: #fff;
+	opacity: 1;
+	transition: color 120ms ease-in-out, opacity 120ms ease-in-out;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+	color: #c4d4f5;
+	opacity: 1;
+}
+
+

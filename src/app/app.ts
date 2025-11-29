@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { TabelaTarefas } from './tabela-tarefas/tabela-tarefas';
-import { FormTarefas } from './form-tarefas/form-tarefas';
-import { TabelaMoradores } from './tabela-moradores/tabela-moradores';
-import { FormMoradores } from './form-moradores/form-moradores';
-import { ListCardTarefas } from './list-card-tarefas/list-card-tarefas';
+import { RouterLink, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [TabelaTarefas, FormTarefas, TabelaMoradores, FormMoradores, ListCardTarefas],
+  imports: [RouterOutlet, RouterLink ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

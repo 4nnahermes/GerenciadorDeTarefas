@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Formulário de Moradores</h2>
+    <h2 class="page-title">Cadastro de Moradores</h2>
 
     <div>
 
@@ -20,6 +20,7 @@
                 placeholder="Pontuação do morador">
         </div>
 
-        <button (click)="cadastrarMorador()" class="btn btn-primary">CADASTRAR</button>
+        <button (click)="salvar()" class="btn btn-primary me-3">{{botaoAcao}}</button>
+        <button (click)="voltar()" class="btn btn-secondary">Voltar</button>
     </div>
 </div>

@@ -5,10 +5,12 @@ import { TarefaService } from '../tarefa-service';
 import { Tarefa } from '../tarefa';
 import { MoedaPipe } from '../moeda-pipe';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
+import { ListCardTarefas } from '../list-card-tarefas/list-card-tarefas';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-tabela-tarefas',
-  imports: [CommonModule, MoedaPipe, FormsModule, FiltroPesquisaPipe],
+  imports: [CommonModule, MoedaPipe, FormsModule, FiltroPesquisaPipe, ListCardTarefas, RouterLink],
   templateUrl: './tabela-tarefas.html',
   styleUrl: './tabela-tarefas.css'
 })
@@ -19,5 +21,9 @@ export class TabelaTarefas {
 
   constructor() {
     this.listaTarefas = this.tarefaService.listar();
+  }
+
+  excluir(id?: number) {
+    this.tarefaService.excluir(id);
   }
 }

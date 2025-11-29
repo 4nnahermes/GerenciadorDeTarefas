@@ -5,10 +5,11 @@ import { MoradorService } from '../morador-service';
 import { Morador } from '../morador';
 import { MoedaPipe } from '../moeda-pipe';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-tabela-moradores',
-  imports: [CommonModule, MoedaPipe, FormsModule, FiltroPesquisaPipe],
+  imports: [CommonModule, MoedaPipe, FormsModule, FiltroPesquisaPipe, RouterLink],
   templateUrl: './tabela-moradores.html',
   styleUrl: './tabela-moradores.css'
 })
@@ -20,5 +21,8 @@ export class TabelaMoradores {
   constructor() {
     this.listaMoradores = this.moradorService.listar();
   }
- 
+
+  excluir(id?: number) {
+    this.moradorService.excluir(id);
+  }
 }

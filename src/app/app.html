@@ -1,8 +1,18 @@
-<div class="container">
-    <h1>Gerenciador de Tarefas</h1>
-    <app-tabela-tarefas/>
-    <app-form-tarefas/>
-    <app-tabela-moradores/>
-    <app-form-moradores/>
-    <app-list-card-tarefas/>
-</div>
+<h1 class="text-center my-3 page-title">Gerenciador de Tarefas</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/tabela-tarefas">Tabela de Tarefas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/formulario-tarefas">Cadastro de Tarefas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/tabela-moradores">Tabela de Moradores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/formulario-moradores">Cadastro de Moradores</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet />

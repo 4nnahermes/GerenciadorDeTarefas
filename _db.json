@@ -1,0 +1,72 @@
+{
+  "moradores": [
+    {
+      "id": "a1f0",
+      "nome": "João Silva",
+      "email": "joao@example.com",
+      "pontuacao": 0
+    },
+    {
+      "id": "e3b2",
+      "nome": "Maria Oliveira",
+      "email": "maria@example.com",
+      "pontuacao": 0
+    },
+    {
+      "id": "7c9d",
+      "nome": "Carlos Souza",
+      "email": "carlos@example.com",
+      "pontuacao": 0
+    },
+    {
+      "id": "d4e1",
+      "nome": "Ana Pereira",
+      "email": "ana@example.com",
+      "pontuacao": 0
+    },
+    {
+      "id": "f012",
+      "nome": "Pedro Fernandes",
+      "email": "pedro@example.com",
+      "pontuacao": 3
+    }
+  ],
+  "tarefas": [
+    {
+      "id": "4b2b",
+      "titulo": "Varrer a casa",
+      "descricao": "Varrer a casa toda",
+      "pontos": 5,
+      "concluida": false,
+      "usuario": "João Silva"
+    },
+    {
+      "id": "0d3a",
+      "titulo": "Lavar a louça",
+      "descricao": "Lavar a louça do almoço",
+      "pontos": 3,
+      "usuario": "Maria Oliveira"
+    },
+    {
+      "id": "25a5",
+      "titulo": "Tirar o lixo",
+      "descricao": "Tirar todos lixos da casa",
+      "pontos": 2,
+      "usuario": "Carlos Souza"
+    },
+    {
+      "id": "b4a8",
+      "titulo": "Lavar roupas",
+      "descricao": "Lavar as roupas da casa toda",
+      "pontos": 4,
+      "usuario": "Ana Pereira"
+    },
+    {
+      "id": "b39d",
+      "titulo": "Limpar banheiro",
+      "descricao": "Limpar todos banheios",
+      "pontos": 3,
+      "usuario": "Pedro Fernandes"
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MoradorService } from '../morador-service';
 import { Morador } from '../morador';
 import { MoedaPipe } from '../moeda-pipe';
 import { FiltroPesquisaPipe } from '../filtro-pesquisa-pipe';
 import { RouterLink } from '@angular/router';
+import { MoradorApiService } from '../morador-api-service';
 
 @Component({
   selector: 'app-tabela-moradores',
@@ -14,15 +14,24 @@ import { RouterLink } from '@angular/router';
   styleUrl: './tabela-moradores.css'
 })
 export class TabelaMoradores {
-  listaMoradores: Morador[] = [];
+  listaMoradores = signal<Morador[]>([]);
   nomePesquisa: string = '';
-  private moradorService = inject(MoradorService);
+  private moradorApiService = inject(MoradorApiService);
 
   constructor() {
-    this.listaMoradores = this.moradorService.listar();
+    this.listar();
   }
 
-  excluir(id?: number) {
-    this.moradorService.excluir(id);
+  listar() {
+    this.moradorApiService.listar().subscribe((moradores) => {
+      this.listaMoradores.set(moradores);
+    });
+  }
+
+  deletar(id?: number) {
+    this.moradorApiService.deletar(id!).subscribe(morador => {
+      alert(`Morador ${morador.nome?.toUpperCase()} excluído com sucesso!`);
+      this.listar();
+    });
   }
 }

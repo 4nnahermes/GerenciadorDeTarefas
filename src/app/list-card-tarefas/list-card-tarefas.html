@@ -2,7 +2,7 @@
     <h2 class="page-title">ListCard de Tarefas</h2>
 
     <div class="row">
-        @for(tar of listaTarefas; track tar.id) {
+        @for( tar of (listaTarefas$ | async); track tar.id) {
         <div class="col col-xl-3 col-lg-4 col-sm-6 col-12">
             <app-card-tarefa class="p-3">
                 <img titulo [src]="tar.imagem ? tar.imagem : '/imagem.png'" alt="Imagem de Tarefa" class="card-img-top">

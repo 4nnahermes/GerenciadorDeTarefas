@@ -1,19 +1,21 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TarefaService } from '../tarefa-service';
+import { Tarefa } from '../tarefa';
 
 @Component({
   selector: 'app-form-tarefas',
   imports: [FormsModule],
   templateUrl: './form-tarefas.html',
-  styleUrl: './form-tarefas.css'
+  styleUrls: ['./form-tarefas.css']
 })
 export class FormTarefas {
-  tarefa: any = { id: 0, titulo: '', descricao: '', pontos: 0, concluida: false, usuario: '' };
-  @Output() onSalvar = new EventEmitter<any>();
+  tarefa = new Tarefa();
+  tarefaService = inject(TarefaService);
 
   cadastrarTarefa() {
-    this.onSalvar.emit(this.tarefa);
+    this.tarefaService.inserir(this.tarefa);
     alert('Tarefa cadastrada com sucesso!');
-    this.tarefa = { id: 0, titulo: '', descricao: '', pontos: 0, concluida: false, usuario: '' };
+    this.tarefa = new Tarefa();
   }
 }

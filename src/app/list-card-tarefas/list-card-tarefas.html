@@ -8,7 +8,7 @@
                 <img titulo [src]="tar.imagem ? tar.imagem : '/imagem.png'" alt="Imagem de Tarefa" class="card-img-top">
                 <div conteudo>
                     <h5 class="card-title">{{ tar.titulo }}</h5>
-                    <p class="card-text">Pontos: {{ tar.pontos }}</p>
+                    <p class="card-text">Pontos: {{ tar.pontos | moeda }}</p>
                     <p class="card-text">Usuário: {{ tar.usuario }}</p>
                 </div>
             </app-card-tarefa>

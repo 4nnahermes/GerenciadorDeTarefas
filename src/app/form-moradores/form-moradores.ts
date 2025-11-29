@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MoradorService } from '../morador-service';
+import { Morador } from '../morador';
 
 @Component({
   selector: 'app-form-moradores',
@@ -8,12 +10,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form-moradores.css'
 })
 export class FormMoradores {
-  morador: any = { id: 0, nome: '', email: '', pontuacao: 0 };
-  @Output() onSalvar = new EventEmitter<any>();
+  morador = new Morador();
+  moradorService = inject(MoradorService);
 
   cadastrarMorador() {
-    this.onSalvar.emit(this.morador);
+    this.moradorService.inserir(this.morador);
     alert('Morador cadastrado com sucesso!');
-    this.morador = { id: 0, nome: '', email: '', pontuacao: 0 };
+    this.morador = new Morador();
   }
 }

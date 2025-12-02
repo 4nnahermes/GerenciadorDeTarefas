@@ -1,0 +1,19 @@
+<div class="login-page">
+	<div class="login-card">
+		<div>
+			<h1>Gerenciador de Tarefas</h1>
+		</div>
+
+		<form class="mt-3" (ngSubmit)="realizarLogin($event)" #loginForm="ngForm">
+			<div class="mb-3">
+				<input id="email" name="email" class="form-control" placeholder="Usuário" [(ngModel)]="usuario.email" required />
+			</div>
+
+			<div class="mb-3">
+				<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" [(ngModel)]="usuario.senha" required />
+			</div>
+
+			<button type="submit" class="btn btn-primary btn-lg w-100">Entrar</button>
+		</form>
+	</div>
+</div>

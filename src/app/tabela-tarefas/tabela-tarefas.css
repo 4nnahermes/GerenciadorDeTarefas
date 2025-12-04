@@ -1,0 +1,21 @@
+.table-responsive {
+	width: 100%;
+	overflow-x: auto;
+}
+
+table.table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table.table td,
+table.table th {
+	vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+	table.table td, table.table th {
+		padding: 0.45rem;
+		font-size: 0.95rem;
+	}
+}

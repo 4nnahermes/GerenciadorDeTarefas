@@ -15,4 +15,14 @@
 	opacity: 1;
 }
 
+@media (max-width: 576px) {
+	.navbar .navbar-nav {
+		padding-left: 0.5rem;
+	}
+	.navbar .nav-link {
+		padding: 0.5rem 0.75rem;
+		display: block;
+	}
+}
+
 
